@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Pencil, Trash2, PlusCircle, MoreHorizontal } from 'lucide-react'
 import { priorityBgText } from '../utils/priorityColor'
 import { fmtDateInput } from '../utils/date'
+import { dueDateBgClass } from '../utils/dueColor'
+// import { categoryBorderTopClass } from '../utils/stateColor'
+import { categoryTagColor } from '../utils/stateColor'
 import type { Todo } from '../types'
 import { Spinner } from './Spinner'
 
@@ -107,7 +110,13 @@ export default function TodoCard({
   }
 
   return (
-    <div className="relative rounded-md border border-gray-200 bg-white shadow-sm p-4 flex flex-col gap-3">
+    <div className="relative  rounded-md border border-gray-200 bg-white shadow-sm p-4 flex flex-col gap-3">
+      <div
+        className={
+          'absolute top-0 right-0 h-[8px] w-[100px] rounded-tr-md rounded-bl-md ' +
+          categoryTagColor(item.category)
+        }
+      />
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -181,7 +190,11 @@ export default function TodoCard({
           {labelizeWord(item.priority)}
         </span>
         {item.dueAt ? (
-          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-amber-800">
+          <span
+            className={
+              'rounded-full px-2 py-0.5 ' + dueDateBgClass(item.dueAt) // 👈 DÙNG MÀU THEO DUE DATE
+            }
+          >
             Due {fmtDateInput(item.dueAt)}
           </span>
         ) : null}
@@ -208,7 +221,11 @@ export default function TodoCard({
                         {labelizeWord(s.priority)}
                       </span>
                       {s.dueAt ? (
-                        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-amber-800">
+                        <span
+                          className={
+                            'rounded-full px-2 py-0.5 ' + dueDateBgClass(s.dueAt) // 👈 ÁP DỤNG CHO SUBTASK
+                          }
+                        >
                           Due {fmtDateInput(s.dueAt)}
                         </span>
                       ) : null}

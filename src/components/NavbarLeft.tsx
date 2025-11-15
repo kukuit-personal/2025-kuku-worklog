@@ -1,31 +1,17 @@
-// app/components/NavbarLeft.tsx
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
-import {
-  Briefcase,
-  HeartPulse,
-  ListTodo,
-  Wallet,
-  AArrowUp,
-  Laptop,
-  Laptop2,
-  LaptopIcon,
-  DollarSign,
-  CircleDollarSign,
-  Volleyball,
-  PiggyBank,
-} from 'lucide-react'
+import { HeartPulse, ListTodo, Laptop, PiggyBank, Volleyball } from 'lucide-react'
 
-type NavItem = {
+export type NavItem = {
   href: string
   label: string
   icon: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
-const ITEMS: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   { href: '/worklog', label: 'Worklog', icon: Laptop },
   { href: '/healthlog', label: 'Health', icon: HeartPulse },
   { href: '/todolist', label: 'Todolist', icon: ListTodo },
@@ -109,7 +95,7 @@ export default function NavbarLeft() {
       {/* nav */}
       <nav className="w-full sm:w-full sm:flex sm:flex-col sm:items-stretch sticky top-0">
         <div className="grid grid-cols-1 gap-1 sm:gap-1 w-full">
-          {ITEMS.map((it) => (
+          {NAV_ITEMS.map((it) => (
             <NavButton key={it.href} item={it} active={isActive(pathname, it.href)} />
           ))}
         </div>

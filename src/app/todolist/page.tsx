@@ -66,22 +66,6 @@ export default function TodoPage() {
               </select>
             </div>
             <div className="col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-              <select
-                value={m.form.priority ?? 'normal'}
-                onChange={(e) =>
-                  m.setForm((prev) => ({ ...prev, priority: e.target.value as TodoPriority }))
-                }
-                className="w-full rounded-md border px-3 py-1.5 text-sm"
-              >
-                {['low', 'normal', 'high', 'urgent', 'critical'].map((p) => (
-                  <option key={p} value={p}>
-                    {p[0].toUpperCase() + p.slice(1)}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
               <select
                 value={m.form.state ?? 'todo'}
@@ -107,6 +91,23 @@ export default function TodoPage() {
                 ))}
               </select>
             </div>
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+              <select
+                value={m.form.priority ?? 'normal'}
+                onChange={(e) =>
+                  m.setForm((prev) => ({ ...prev, priority: e.target.value as TodoPriority }))
+                }
+                className="w-full rounded-md border px-3 py-1.5 text-sm"
+              >
+                {['low', 'normal', 'high', 'urgent', 'critical'].map((p) => (
+                  <option key={p} value={p}>
+                    {p[0].toUpperCase() + p.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700 mb-1">Due date</label>
               <input

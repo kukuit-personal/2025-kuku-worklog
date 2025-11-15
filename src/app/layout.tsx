@@ -4,6 +4,7 @@ import './globals.css'
 import 'grapesjs/dist/css/grapes.min.css'
 import NavbarLeft from '@/components/NavbarLeft'
 import HeaderTop from '@/components/HeaderTop'
+import BottomNavMobile from '@/components/BottomNavMobile'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.className} bg-gray-50`}>
         <div className="min-h-screen flex relative">
-          {/* ✅ Đưa checkbox vào cùng wrapper, đứng TRƯỚC sidebar */}
+          {/* ✅ Checkbox điều khiển sidebar (peer) */}
           <input id="nav-toggle" type="checkbox" className="peer sr-only" />
 
           {/* Sidebar (off-canvas mobile, fixed width desktop) */}
@@ -37,10 +38,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Main area */}
           <div className="flex-1 flex flex-col">
             <HeaderTop />
-            <div>{children}</div>
+            {/* ✅ chừa khoảng cho bottom nav mobile */}
+            <main className="flex-1 pb-12 sm:pb-0">{children}</main>
           </div>
 
-          {/* ✅ Backdrop cũng là sibling của peer */}
+          {/* ✅ Bottom nav chỉ cho mobile */}
+          <BottomNavMobile />
+
+          {/* ✅ Backdrop (cao hơn bottom nav nhờ z-index) */}
           <label
             htmlFor="nav-toggle"
             className="fixed inset-0 bg-black/30 z-40 hidden peer-checked:block sm:hidden"

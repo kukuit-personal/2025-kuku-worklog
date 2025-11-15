@@ -104,22 +104,6 @@ export function EditModal({
             </select>
           </div>
 
-          {/* Priority */}
-          <div className="col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-            <select
-              value={editForm.priority}
-              onChange={(e) => setEditForm((f: any) => ({ ...f, priority: e.target.value }))}
-              className="w-full rounded-md border px-3 py-1.5 text-sm"
-            >
-              {PRIOS.map((p) => (
-                <option key={p} value={p}>
-                  {p.charAt(0).toUpperCase() + p.slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* State */}
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
@@ -131,6 +115,22 @@ export function EditModal({
               {STATE_OPTIONS.map((s) => (
                 <option key={s.val} value={s.val}>
                   {s.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Priority */}
+          <div className="col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+            <select
+              value={editForm.priority}
+              onChange={(e) => setEditForm((f: any) => ({ ...f, priority: e.target.value }))}
+              className="w-full rounded-md border px-3 py-1.5 text-sm"
+            >
+              {PRIOS.map((p) => (
+                <option key={p} value={p}>
+                  {p.charAt(0).toUpperCase() + p.slice(1)}
                 </option>
               ))}
             </select>

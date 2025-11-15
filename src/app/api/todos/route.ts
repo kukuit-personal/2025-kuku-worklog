@@ -129,10 +129,11 @@ export async function GET(req: Request) {
     let orderBy: Prisma.TodoOrderByWithRelationInput[] = []
 
     if (orderField === 'dueAt') {
-      // Nếu Prisma 5+ có nulls: 'last', bạn có thể bật dòng này thay thế:
-      // orderBy.push({ dueAt: { sort: orderDir, nulls: 'last' } as any })
-      orderBy.push({ dueAt: orderDir })
+      // Ưu tiên priority trước
       orderBy.push({ priority: 'desc' })
+      // Nếu priority bằng nhau → xét dueAt
+      orderBy.push({ dueAt: orderDir })
+      // Cuối cùng fallback createdAt
       orderBy.push({ createdAt: 'desc' })
     } else if (orderField === 'createdAt') {
       orderBy.push({ createdAt: orderDir })
