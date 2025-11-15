@@ -9,7 +9,7 @@ export function priorityBgText(priority: TodoPriority) {
     case 'high':
       return 'bg-orange-200 text-gray-900'
     case 'normal':
-      return 'bg-green-600 text-white'
+      return 'bg-green-200 text-gray-900'
     case 'low':
     default:
       return 'bg-green-100 text-gray-900'
