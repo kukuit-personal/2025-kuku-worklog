@@ -16,7 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: '/healthlog', label: 'Health', icon: HeartPulse },
   { href: '/todolist', label: 'Todolist', icon: ListTodo },
   { href: '/money', label: 'Money', icon: PiggyBank },
-  { href: '/football', label: 'Football', icon: Volleyball },
+  { href: '/tools', label: 'Tools', icon: Volleyball },
 ]
 
 function isActive(pathname: string, href: string) {
