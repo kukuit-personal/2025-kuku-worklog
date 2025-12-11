@@ -135,6 +135,7 @@ export default function HealthLogListMobile({
           className="px-3 py-1.5 rounded-md border text-sm"
         >
           <option value="last7">Last 7 days</option>
+          <option value="last30">Last 30 days</option>
           <option value="thisMonth">This month</option>
           <option value="all">All</option>
         </select>
@@ -149,7 +150,7 @@ export default function HealthLogListMobile({
           className="px-3 py-1.5 rounded-md border text-sm"
         >
           <option value={10}>10</option>
-          <option value={20}>20</option>
+          <option value={30}>30</option>
           <option value={50}>50</option>
         </select>
       </div>

@@ -5,7 +5,7 @@ import HealthLogTable from './components/LogTable'
 
 // ===== Types =====
 type Status = 'active' | 'disabled'
-type FilterMode = 'last7' | 'thisMonth' | 'all'
+type FilterMode = 'last7' | 'last30' | 'thisMonth' | 'all'
 
 type HealthLog = {
   id: string
@@ -62,9 +62,9 @@ export default function HealthLogPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   // View mode + pagination
-  const [filterMode, setFilterMode] = useState<FilterMode>('last7')
+  const [filterMode, setFilterMode] = useState<FilterMode>('last30')
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, setPageSize] = useState(30)
 
   // Add form
   const [form, setForm] = useState({
@@ -125,6 +125,9 @@ export default function HealthLogPage() {
     qs.set('take', String(pageSize))
     if (filterMode === 'last7') {
       qs.set('from', addDays(today, -6))
+      qs.set('to', today)
+    } else if (filterMode === 'last30') {
+      qs.set('from', addDays(today, -29))
       qs.set('to', today)
     } else if (filterMode === 'thisMonth') {
       const { start, end } = monthStartEndOf(today)
@@ -670,7 +673,7 @@ function Spinner({ className = 'w-4 h-4' }: { className?: string }) {
 function PlusIcon({ className = 'w-4 h-4' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className}>
-      <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2h6z" />
+      <path fill="currentColor" d="M11 11V5h2v6h6v2h-2v6h-2v-6H5v-2h6z" />
     </svg>
   )
 }
