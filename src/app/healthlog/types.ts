@@ -1,6 +1,6 @@
 // components/healthlog.types.ts
 export type Status = 'active' | 'disabled'
-export type FilterMode = 'last7' | 'thisMonth' | 'all'
+export type FilterMode = 'last7' | 'last30' | 'thisMonth' | 'all'
 
 export type HealthLog = {
   id: string
