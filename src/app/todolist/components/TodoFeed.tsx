@@ -33,7 +33,8 @@ export function TodoFeed({
 }) {
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4">
+      {/* luôn 1 cột trên mọi kích thước màn hình */}
+      <div className="grid grid-cols-1 gap-4 mb-4">
         {items.map((it) => (
           <TodoCard
             key={it.id}
