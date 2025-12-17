@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FilterMode, Todo, TodoCategory, TodoPriority, TodoState } from '../types'
 import {
   listTodos,
@@ -20,6 +20,12 @@ type NewForm = {
   dueAt: string
 }
 
+function isTodayTaskPriorities(p: FilterMode['priorities']) {
+  if (p === 'all') return false
+  const s = new Set(p)
+  return s.size === 2 && s.has('urgent') && s.has('critical')
+}
+
 export function useTodoList() {
   const [items, setItems] = useState<Todo[]>([])
   const [subtasks, setSubtasks] = useState<Record<string, Todo[]>>({})
@@ -31,6 +37,23 @@ export function useTodoList() {
     categories: 'all',
     priorities: 'all',
   })
+
+  // NEW: Today task flag (derived + stored)
+  const [todayTaskOn, setTodayTaskOn] = useState(false)
+
+  useEffect(() => {
+    setTodayTaskOn(isTodayTaskPriorities(filters.priorities))
+  }, [filters.priorities])
+
+  function toggleTodayTask() {
+    setPage(1)
+    setFilters((f) => ({
+      ...f,
+      priorities: isTodayTaskPriorities(f.priorities)
+        ? 'all'
+        : (['urgent', 'critical'] as TodoPriority[]),
+    }))
+  }
 
   const [isLoading, setIsLoading] = useState(false)
   const [addOpen, setAddOpen] = useState(false)
@@ -184,6 +207,10 @@ export function useTodoList() {
     updating,
     isLoading,
     subFormOpen,
+
+    // NEW
+    todayTaskOn,
+    toggleTodayTask,
 
     setFilters,
     setPage,

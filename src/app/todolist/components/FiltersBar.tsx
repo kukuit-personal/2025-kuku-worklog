@@ -12,6 +12,9 @@ export function FiltersBar({
   setPageSize,
   setPage,
   onChangePageSize,
+  // NEW
+  todayTaskOn,
+  onToggleTodayTask,
 }: {
   filters: FilterMode
   setFilters: (updater: any) => void
@@ -19,6 +22,10 @@ export function FiltersBar({
   setPageSize: (n: number) => void
   setPage: (n: number) => void
   onChangePageSize?: (n: number) => void
+
+  // NEW
+  todayTaskOn?: boolean
+  onToggleTodayTask?: () => void
 }) {
   // ===== Local filter states =====
   const [states, setStates] = useState<TodoState[]>(filters.states)
@@ -70,13 +77,28 @@ export function FiltersBar({
     <div className="mb-3">
       {/* Header với nút Show Filter */}
       <div className="flex items-center justify-between mb-2">
-        <button
-          onClick={() => setShowFilters((v) => !v)}
-          className="inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm bg-white hover:bg-gray-50"
-        >
-          <SlidersHorizontal className="w-4 h-4" />
-          {showFilters ? 'Hide Filters' : 'Show Filters'}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setShowFilters((v) => !v)}
+            className="inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm bg-white hover:bg-gray-50"
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+            {showFilters ? 'Hide Filters' : 'Show Filters'}
+          </button>
+
+          {/* NEW: Today task */}
+          <button
+            type="button"
+            onClick={() => onToggleTodayTask?.()}
+            className={
+              'inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm ' +
+              (todayTaskOn ? 'bg-gray-900 text-white border-gray-900' : 'bg-white hover:bg-gray-50')
+            }
+            title="Only urgent & critical"
+          >
+            Today task
+          </button>
+        </div>
       </div>
 
       {/* Panel filter */}
