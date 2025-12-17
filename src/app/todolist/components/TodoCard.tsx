@@ -110,7 +110,13 @@ export default function TodoCard({
   }
 
   return (
-    <div className="relative rounded-md border border-gray-200 bg-white shadow-sm">
+    <div
+      className={
+        'relative rounded-md border border-gray-200 shadow-sm ' +
+        categoryTagColor(item.category) +
+        ' bg-opacity-10'
+      }
+    >
       <div
         className={
           'absolute top-0 h-[8px] w-[100px] rounded-br-md rounded-tl-md ' +
@@ -282,7 +288,10 @@ export default function TodoCard({
             {subtasks.map((s, i) => {
               const zebra = i % 2 === 0 ? 'bg-gray-100' : 'bg-white'
               return (
-                <li key={s.id} className={`rounded-md border border-gray-200 p-3 ${zebra}`}>
+                <li
+                  key={s.id}
+                  className={`rounded-md border border-gray-200 p-3 bg-opacity-50 ${zebra}`}
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <div className="font-medium text-sm text-gray-900 break-words">{s.title}</div>

@@ -12,7 +12,6 @@ import { TodoCategory, TodoPriority, TodoState } from './types'
 
 export default function TodoPage() {
   const m = useTodoList()
-  const hasMore = m.page < Math.max(1, Math.ceil(m.total / m.pageSize))
 
   return (
     <main className="mx-auto max-w-6xl p-4 sm:p-6">
@@ -144,6 +143,9 @@ export default function TodoPage() {
         pageSize={m.pageSize}
         setPageSize={m.setPageSize as any}
         setPage={m.setPage as any}
+        // NEW
+        todayTaskOn={m.todayTaskOn}
+        onToggleTodayTask={m.toggleTodayTask}
       />
 
       {m.isLoading ? (
@@ -163,9 +165,6 @@ export default function TodoPage() {
           onOpenEdit={(t) => m.openEdit(t, fmtDateInput)}
           onDelete={m.onDeleteById}
           onCreateSub={m.onCreateSub}
-          onLoadMore={() => {}}
-          hasMore={hasMore}
-          isLoadingMore={false}
         />
       )}
 
