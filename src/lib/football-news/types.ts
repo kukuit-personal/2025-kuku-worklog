@@ -7,6 +7,7 @@ export interface FootballNewsItem {
   publishedAt: string | null
   summary: string
   type: NewsType
+  images?: string[]
   slug?: string
   hotScore?: number
 }
